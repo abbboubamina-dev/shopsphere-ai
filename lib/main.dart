@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'core/constants/app_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ShopSphereApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ShopSphereApp extends StatelessWidget {
+  const ShopSphereApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       debugShowCheckedModeBanner: false,
-       theme: ThemeData(fontFamily: "abb"),
-      
+      debugShowCheckedModeBanner: false,
+      title: 'ShopSphere AI',
+      theme: AppTheme.lightTheme,
+      home: const Scaffold(
+        body: Center(
+          child: Text(
+            'Welcome to ShopSphere AI',
+          ),
+        ),
+      ),
     );
   }
 }

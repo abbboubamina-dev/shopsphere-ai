@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # flutter_application_1
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# shopsphere-ai
+a modern multi-vendor  e-commerce mobile application built with Flutter, Node.js and Clean Architecture 
+>>>>>>> 945d98de048c0f5f434d875288e5909da6cf19d4

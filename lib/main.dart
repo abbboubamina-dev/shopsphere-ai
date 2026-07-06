@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'core/constants/app_theme.dart';
+import 'features/auth/presentation/pages/sign_in_page.dart';
 
 void main() {
-  runApp(const ShopSphereApp());
+  runApp(const ShopSphere());
 }
 
-class ShopSphereApp extends StatelessWidget {
-  const ShopSphereApp({super.key});
+class ShopSphere extends StatelessWidget {
+  const ShopSphere({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ShopSphere AI',
-      theme: AppTheme.lightTheme,
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Welcome to ShopSphere AI',
-          ),
-        ),
-      ),
+      home: const SignInPage(),
     );
   }
 }

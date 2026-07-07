@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/auth/presentation/pages/sign_up_page.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -7,12 +8,16 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
+        child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+              vertical: 30,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
+                const SizedBox(height: 20),
 
                 Image.asset(
                   'assets/img/logo.png',
@@ -24,7 +29,7 @@ class SignInPage extends StatelessWidget {
                 const Text(
                   "Welcome Back",
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -38,94 +43,115 @@ class SignInPage extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
+
                 const SizedBox(height: 35),
 
-TextField(
-  keyboardType: TextInputType.emailAddress,
-  decoration: InputDecoration(
-    hintText: "Email",
-    prefixIcon: const Icon(Icons.email_outlined),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-    ),
-  ),
-),
-const SizedBox(height: 20),
-TextField(
-  obscureText: true,
-  decoration: InputDecoration(
-    hintText: "Password",
-    prefixIcon: const Icon(Icons.lock_outline),
-    suffixIcon: const Icon(Icons.visibility_off),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-    ),
-  ),
-),
-const SizedBox(height: 15),
-Align(
-  alignment: Alignment.centerRight,
-  child: TextButton(
-    onPressed: () {},
-    child: const Text("Forgot Password?"),
-  ),
-),
-const SizedBox(height: 20),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    prefixIcon: const Icon(Icons.email_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
 
-SizedBox(
-  width: double.infinity,
-  height: 55,
-  child: ElevatedButton(
-    onPressed: () {},
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-    ),
-    child: const Text(
-      "Sign In",
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ),
-),
-const SizedBox(height: 25),
-SizedBox(
-  width: double.infinity,
-  height: 55,
-  child: OutlinedButton.icon(
-    onPressed: () {},
-    icon: const Icon(Icons.g_mobiledata, size: 30),
-    label: const Text(
-      "Continue with Google",
-      style: TextStyle(fontSize: 16),
-    ),
-    style: OutlinedButton.styleFrom(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-    ),
-  ),
-),
-const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
-Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    const Text("Don't have an account?"),
-    TextButton(
-      onPressed: () {},
-      child: const Text("Sign Up"),
-    ),
-  ],
-),
+                TextFormField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: const Icon(Icons.visibility_off),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
 
+                const SizedBox(height: 10),
 
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Forgot Password?",
+                    ),
+                  ),
+                ),
 
+                const SizedBox(height: 10),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Sign In",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text("OR"),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 25),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.g_mobiledata),
+                    label: const Text(
+                      "Continue with Google",
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account?",
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context)=> const
+                        SignUpPage(),),);
+                      },
+                      child: const Text(
+                        "Sign Up",
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

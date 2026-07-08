@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -118,25 +119,56 @@ class _SignUpPageState extends State<SignUpPage> {
 
             const SizedBox(height: 25),
 
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () {
-                  print(nameController.text);
-                  print(emailController.text);
-                  print(passwordController.text);
-                  print(confirmPasswordController.text);
-                  if (_formKey.currentState!.validate()) {
-  print("Account Created");
-}
+            
+                  
+                 
+                SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                onPressed: () async {
+  if (_formKey.currentState!.validate()) {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      print("Account Created");
+    } catch (e) {
+      print("ERROR: $e");
+      print("stackTrace");
+    }
+  }
+
+
                 },
-                child: const Text("Create Account"),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ));
+    child: const Text("Create Account"),
+  ),),
+                
+
+const SizedBox(height: 15),
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    const Text("Already have an account?"),
+    TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const Text("Sign In"),
+    ),
+  ],
+   ),
+    ]          ),
+    ),
+     
+    ),  
+    );
+     
+
+         
+    
   }
 }

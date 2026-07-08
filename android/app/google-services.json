@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967097017943",
+    "project_id": "shopsphere-ai-2477a",
+    "storage_bucket": "shopsphere-ai-2477a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967097017943:android:cb06f963d6ad85ed77e512",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967097017943-6o7lo4f2dkronjbb0rq00dqjni2s3e1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgQI1Jtd58uEyBz2VDaYvDiHs3NsLl_yM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967097017943-6o7lo4f2dkronjbb0rq00dqjni2s3e1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

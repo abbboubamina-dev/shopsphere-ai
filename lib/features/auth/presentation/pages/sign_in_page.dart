@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/auth/presentation/pages/sign_up_page.dart';
-import 'sign_up_page.dart';
-class SignInPage extends StatelessWidget {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/features/auth/presentation/pages/home_page.dart';
+ 
+ class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +58,9 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(height: 35),
 
                 TextFormField(
+                  controller : emailController ,
                   decoration: InputDecoration(
+                    
                     hintText: "Email",
                     prefixIcon: const Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
@@ -59,6 +72,7 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(height: 15),
 
                 TextFormField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
@@ -75,7 +89,9 @@ class SignInPage extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                     
+                    },
                     child: const Text(
                       "Forgot Password?",
                     ),
@@ -88,7 +104,25 @@ class SignInPage extends StatelessWidget {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+  await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: emailController.text,
+    password: passwordController.text,
+  );
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Text("Login Successfully"),
+    ),
+  );
+
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const HomePage(),
+    ),
+  );
+},
                     child: const Text(
                       "Sign In",
                       style: TextStyle(

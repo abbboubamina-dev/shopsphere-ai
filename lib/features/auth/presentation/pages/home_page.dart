@@ -1,277 +1,367 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/category_card.dart';
+import 'products_page.dart';
+import'package:firebase_auth/firebase_auth.dart';
+import 'sign_in_page.dart';
+import 'package:flutter_application_1/widgets/product_card.dart';
+import 'electronics_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("ShopSphere AI"),
-        centerTitle: true,
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: const Color(0xffF8F9FD),
+
+    appBar: AppBar(
+      backgroundColor: Colors.deepPurple,
+      elevation: 0,
+
+      title: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Welcome Back ",
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.white70,
+            ),
+          ),
+          Text(
+            "ShopSphere AI",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
 
-      body: SingleChildScrollView(
-  child: Padding(
-    padding: const EdgeInsets.all(16),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      actions: [
 
-        // Search Bar
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Search products...",
-            prefixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
+        IconButton(
+          icon: const Icon(
+            Icons.notifications_none,
+            color: Colors.white,
           ),
+          onPressed: () {},
         ),
 
-        const SizedBox(height: 20),
-
-        // Welcome Section
-        const Text(
-          "👋 Welcome Back!",
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
+        IconButton(
+          icon: const Icon(
+            Icons.favorite_border,
+            color: Colors.white,
           ),
+          onPressed: () {},
         ),
 
-        const SizedBox(height: 8),
-
-        const Text(
-          "Discover amazing products today",
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey,
+        IconButton(
+          icon: const Icon(
+            Icons.logout,
+            color: Colors.white,
           ),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SignInPage(),
+              ),
+            );
+          },
         ),
-
-        const SizedBox(height: 20),
-
-        // Sale Banner
-        Container(
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
-              colors: [
-                Colors.deepPurple,
-                Colors.purpleAccent,
-              ],
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "🔥 Summer Sale",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Up to 50% OFF",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        const SizedBox(height: 25),
-
-        // Categories
-        const Text(
-          "Categories",
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-
-        const SizedBox(height: 15),
-
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: const [
-              CategoryItem(Icons.phone_android, "Electronics"),
-              CategoryItem(Icons.checkroom, "Fashion"),
-              CategoryItem(Icons.shopping_bag, "Shoes"),
-              CategoryItem(Icons.menu_book, "Books"),
-              CategoryItem(Icons.sports_esports, "Gaming"),
-            ],
-          ),
-        ),
-
-        const SizedBox(height: 25),
-
-        // Popular Products
-        const Text(
-          "Popular Products",
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-
-        const SizedBox(height: 15),
-
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.75,
-          children: const [
-            ProductCard(
-              title: "iPhone 17",
-              price: "\$999",
-              icon: Icons.phone_iphone,
-            ),
-            ProductCard(
-              title: "Nike Shoes",
-              price: "\$120",
-              icon: Icons.shopping_bag,
-            ),
-            ProductCard(
-              title: "Laptop",
-              price: "\$1500",
-              icon: Icons.laptop,
-            ),
-            ProductCard(
-              title: "Headphones",
-              price: "\$80",
-              icon: Icons.headphones,
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 20),
       ],
     ),
+
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            const SizedBox(height: 10),
+
+            // SEARCH BAR
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Search products...",
+                prefixIcon: const Icon(Icons.search),
+
+                filled: true,
+                fillColor: Colors.white,
+
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // BANNER
+            Container(
+              height: 180,
+              width: double.infinity,
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0xff6A11CB),
+                    Color(0xff2575FC),
+                  ],
+                ),
+              ),
+
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+
+                    const Text(
+                      "Summer Sale 🔥",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      "Up To 50% OFF",
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 18,
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    ElevatedButton(
+                      onPressed: () {},
+
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,),
+
+                      child: const Text(
+                        "Shop Now",
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                      
+   
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
+
+            const Text(
+              "Categories",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 15),
+            GridView.count(
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  crossAxisCount: 2,
+  crossAxisSpacing: 12,
+  mainAxisSpacing: 12,
+  childAspectRatio: 1.2,
+  children: [
+
+    CategoryCard(
+      title: "Electronics",
+      icon: Icons.phone_android,
+      onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const ElectronicsPage(),
+    ),
+  );
+},
+    ),
+
+    CategoryCard(
+      title: "Fashion",
+      icon: Icons.checkroom,
+      onTap: () {},
+    ),
+
+    CategoryCard(
+      title: "Shoes",
+      icon: Icons.shopping_bag,
+      onTap: () {},
+    ),
+
+    CategoryCard(
+      title: "Books",
+      icon: Icons.menu_book,
+      onTap: () {},
+    ),
+  ],
+),
+          
+
+            const SizedBox(height: 25),
+
+            const Text(
+              "Featured Products",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            
+
+            SizedBox(
+  height: 260,
+  child: ListView(
+    scrollDirection: Axis.horizontal,
+    children: const [
+
+      ProductCard(
+        title: "iPhone 17 Pro",
+        price: "\$999",
+        img: "assets/img/images.png",
+      ),
+
+      ProductCard(
+        title: "Nike Air Max",
+        price: "\$120",
+        img: "assets/img/images (1).png",
+      ),
+
+      ProductCard(
+        title: "MacBook Air",
+        price: "\$1299",
+        img: "assets/img/img-MacBook.png",
+      ),
+    ],
   ),
 ),
 
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: "Cart",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favorites",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-        ],
+            const SizedBox(height: 25),
+
+            
+            
+          ],
+        ),
       ),
-    );
-  }
-}
+    ),
 
-// Category Widget
+    bottomNavigationBar: BottomNavigationBar(
+      currentIndex: 0,
 
-class CategoryItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
+      selectedItemColor: Colors.deepPurple,
 
-  const CategoryItem(
-    this.icon,
-    this.title, {
-    super.key,
-  });
+      type: BottomNavigationBarType.fixed,
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            child: Icon(icon, size: 30),
-          ),
-          const SizedBox(height: 8),
-          Text(title),
-        ],
-      ),
-    );
-  }
-}
+      items: const [
 
-// Product Widget
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "Home",
+        ),
 
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag),
+          label: "Products",
+        ),
+
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+          label: "Favorites",
+        ),
+
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: "Profile",
+        ),
+      ],
+    ),
+  );
+}}
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
-  final IconData icon;
+  final String img;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
-    required this.icon,
+    required this.img,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Icon(
-              icon,
-              size: 60,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+    return Container(
+      width: 180,
+      margin: const EdgeInsets.only(right: 15),
+      child: Card(
+        elevation: 6,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+
+             Expanded(
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(15),
+    child: Image.asset(
+      img,
+      width: double.infinity,
+      fit: BoxFit.cover,
+    ),
+  ),
+),
+              const SizedBox(height: 10),
+
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              price,
-              style: const TextStyle(
-                fontSize: 16,
+
+              const SizedBox(height: 5),
+
+              Text(
+                price,
+                style: const TextStyle(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite_border),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

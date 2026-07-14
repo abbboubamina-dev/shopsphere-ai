@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'sign_in_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -133,6 +134,45 @@ class _SignUpPageState extends State<SignUpPage> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      showDialog(
+  context: context,
+  barrierDismissible: false,
+  builder: (context) => AlertDialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    title: const Row(
+      children: [
+        Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 30,
+        ),
+        SizedBox(width: 10),
+        Text("Success"),
+      ],
+    ),
+    content: const Text(
+      "Account created successfully 🎉",
+      style: TextStyle(fontSize: 16),
+    ),
+    actions: [
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SignInPage(),
+            ),
+          );
+        },
+        child: const Text("Continue"),
+      ),
+    ],
+  ),
+);
 
       print("Account Created");
     } catch (e) {
